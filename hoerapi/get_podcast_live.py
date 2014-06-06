@@ -33,3 +33,16 @@ def get_podcast_live(podcast, count=5):
         'podcast': podcast,
         'count': count,
     })
+
+
+class LiveByIDApiResponse(ApiResponse):
+    def __init__(self, status, msg, data):
+        ApiResponse.__init__(self, status, msg)
+
+        self.data = None
+        if data is not None and len(data) == 1:
+            self.data = PodcastLive(data[0])
+
+
+def get_live_by_id(id):
+    return call_api('getLiveByID', LiveByIDApiResponse, { 'ID': id })
