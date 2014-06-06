@@ -46,3 +46,25 @@ class LiveByIDApiResponse(ApiResponse):
 
 def get_live_by_id(id):
     return call_api('getLiveByID', LiveByIDApiResponse, { 'ID': id })
+
+
+class LiveApiResponse(ApiResponse):
+    def __init__(self, status, msg, events):
+        ApiResponse.__init__(self, status, msg)
+
+        self.events = []
+
+        if events is not None:
+            for pod in events:
+                self.events.append(PodcastLive(pod))
+
+
+def get_live(count=5, dateStart=None, dateEnd=None):
+    params = { 'count': count }
+
+    if dateStart is not None:
+        params['dateStart'] = dateStart.strftime('%y-%m-%d')
+    if dateEnd is not None:
+        params['dateEnd'] = dateEnd.strftime('%y-%m-%d')
+
+    return call_api('getLive', LiveApiResponse, params)
