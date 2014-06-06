@@ -34,6 +34,6 @@ def call_api(action, clazz, params={}):
     r = requests.get(API_URL, params=params)
     rjson = r.json()
 
-    data = None if 'data' not in rjson else rjson['data']
+    data = rjson.get('data', {})
 
     return clazz(rjson['status'], rjson['msg'], data)

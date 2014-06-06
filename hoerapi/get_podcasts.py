@@ -2,12 +2,9 @@ from hoerapi.lowlevel import ApiResponse, call_api
 
 
 class Podcast:
-    def __init__(self, slug, title):
-        self.slug = slug
-        self.title = title
-
-    slug = ''
-    title = ''
+    def __init__(self, data):
+        self.slug = data.get('slug', '')
+        self.title = data.get('title', '')
 
 
 class PodcastApiResponse(ApiResponse):
@@ -17,7 +14,7 @@ class PodcastApiResponse(ApiResponse):
         self.podcasts = []
 
         for pod in podcasts:
-            self.podcasts.append(Podcast(pod['slug'], pod['title']))
+            self.podcasts.append(Podcast(pod))
 
 
 def get_podcasts():
