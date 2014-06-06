@@ -1,6 +1,5 @@
-from hoerapi.lowlevel import ApiResponse, call_api
+from hoerapi.lowlevel import ApiResponse, call_api, parse_date
 from hoerapi.CommonEqualityMixin import CommonEqualityMixin
-from datetime import datetime
 
 
 class PodcastLive(CommonEqualityMixin):
@@ -13,7 +12,7 @@ class PodcastLive(CommonEqualityMixin):
         self.title = data.get('title', '')
         self.url = data.get('url', '')
         self.streamurl = data.get('streamurl', '')
-        self.livedate = datetime.strptime(data.get('livedate', None), "%Y-%m-%d %H:%M:%S")
+        self.livedate = parse_date(data.get('livedate', None))
         self.duration = int(data.get('duration', 0))
         self.twittered = data.get('twittered', '')
 

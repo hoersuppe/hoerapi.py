@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 
 
 API_URL = r'http://hoersuppe.de/api/'
@@ -16,6 +17,10 @@ class ApiResponse:
     @property
     def msg(self):
         return self._msg
+
+
+def parse_date(str):
+    return datetime.strptime(str, "%Y-%m-%d %H:%M:%S")
 
 
 def status():
