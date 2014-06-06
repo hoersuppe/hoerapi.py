@@ -1,4 +1,4 @@
-from lowlevel import ApiResponse, call_api
+from hoerapi.lowlevel import ApiResponse, call_api
 
 
 class Podcast:

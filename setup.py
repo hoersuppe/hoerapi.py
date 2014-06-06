@@ -7,4 +7,7 @@ setup(name='hoerapi',
       author_email='m@luto.at',
       url='https://github.com/hoersuppe/hoerapi.py',
       packages=['hoerapi'],
+      install_requires=[
+       'requests',
+      ],
      )
