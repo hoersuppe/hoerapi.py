@@ -8,7 +8,7 @@ class Podcast(CommonEqualityMixin):
         self.title = data.get('title', None)
 
 
-class PodcastApiResponse(ApiResponse):
+class PodcastsApiResponse(ApiResponse):
     def __init__(self, status, msg, podcasts):
         ApiResponse.__init__(self, status, msg)
 
@@ -20,4 +20,4 @@ class PodcastApiResponse(ApiResponse):
 
 
 def get_podcasts():
-    return call_api('getPodcasts', PodcastApiResponse, {})
+    return call_api('getPodcasts', PodcastsApiResponse, {})

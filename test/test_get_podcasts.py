@@ -1,5 +1,5 @@
 import pytest
-from hoerapi.get_podcasts import Podcast, PodcastApiResponse
+from hoerapi.get_podcasts import Podcast, PodcastsApiResponse
 
 
 @pytest.mark.parametrize("input,slug,title", [
@@ -17,6 +17,6 @@ def test_podcast(input, slug, title):
     ([{}], [Podcast({})]),
     (None, []),
 ])
-def test_podcastApiResponse(input, podcasts):
-    resp = PodcastApiResponse(0, 'ok', input)
+def test_podcastsApiResponse(input, podcasts):
+    resp = PodcastsApiResponse(0, 'ok', input)
     assert resp.podcasts == podcasts
