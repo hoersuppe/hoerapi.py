@@ -4,3 +4,5 @@ from hoerapi.get_podcast_data import get_podcast_data, PodcastData, PodcastDataC
 from hoerapi.get_podcasts import get_podcasts, Podcast
 from hoerapi.get_podcast_live import PodcastLive, get_live, get_live_by_id, get_podcast_live
 from hoerapi.get_deleted import DeleteEntry, get_deleted
+
+from hoerapi.errors import InvalidDataError, ApiError, HoerApiError, InvalidJsonError, MissingAttributeError, NoDataError
