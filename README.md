@@ -25,6 +25,8 @@ print(data.cluster) # 'berlin'
 ```
 
 ### Methods
+* `status()`
+  * returns `True` if the API seems to be up, otherwise `False`
 * `get_deleted()`
   * https://github.com/hoersuppe/doc#getdeleted
   * returns: an instance of `DeleteEntry`
