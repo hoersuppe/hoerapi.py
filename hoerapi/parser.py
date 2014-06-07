@@ -5,11 +5,8 @@ def parser_list(clazz, data):
     items = []
 
     if isinstance(data, list):
-        for episode in data:
-            try:
-                items.append(clazz(episode))
-            except KeyError as e:
-                raise MissingAttributeError(e.args[0])
+        for item in data:
+            items.append(parser_object(clazz, item))
     else:
         raise InvalidDataError('not an array')
 
