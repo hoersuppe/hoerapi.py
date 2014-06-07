@@ -5,8 +5,8 @@ from hoerapi.parser import parser_list
 
 class Podcast(CommonEqualityMixin):
     def __init__(self, data):
-        self.slug = data.get('slug', None)
-        self.title = data.get('title', None)
+        self.slug = data['slug']
+        self.title = data['title']
 
 
 def get_podcasts():
