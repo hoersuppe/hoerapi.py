@@ -2,15 +2,10 @@ from hoerapi.errors import MissingAttributeError, InvalidDataError
 
 
 def parser_list(clazz, data):
-    items = []
-
     if isinstance(data, list):
-        for item in data:
-            items.append(parser_object(clazz, item))
+        return [parser_object(clazz, item) for item in data]
     else:
         raise InvalidDataError('not an array')
-
-    return items
 
 
 def parser_object(clazz, data):
