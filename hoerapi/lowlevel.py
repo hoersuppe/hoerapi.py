@@ -1,44 +1,33 @@
 import requests
-from datetime import datetime
+from hoerapi.errors import InvalidJsonError, ApiError, NoDataError
 
 
 API_URL = r'http://hoersuppe.de/api/'
 
 
-class ApiResponse:
-    def __init__(self, status, msg):
-        self._status = status
-        self._msg = msg
-
-    @property
-    def status(self):
-        return self._status
-
-    @property
-    def msg(self):
-        return self._msg
-
-
-def parse_date(str):
-    return datetime.strptime(str, "%Y-%m-%d %H:%M:%S")
-
-
 def status():
-    resp = call_api('getLiveByID')
-
-    if resp.status == 0 and resp.msg == 'no ID given':
-        return True
-    else:
+    try:
+        resp = call_api('getLiveByID')
+        return resp.status == 0 and resp.msg == 'no ID given'
+    except:
         return False
 
 
-def call_api(action, clazz, params={}):
+def call_api(action, params={}):
     params = params.copy()
     params['action'] = action
 
     r = requests.get(API_URL, params=params)
-    rjson = r.json()
 
-    data = rjson.get('data', {})
+    try:
+        rjson = r.json()
+    except:
+        raise InvalidJsonError(r.text)
 
-    return clazz(rjson['status'], rjson['msg'], data)
+    if rjson['status'] != 1:
+        raise ApiError(rjson['msg'])
+
+    if 'data' not in rjson:
+        raise NoDataError()
+
+    return rjson['data']

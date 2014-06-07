@@ -1,5 +1,6 @@
-from hoerapi.lowlevel import ApiResponse, call_api
-from hoerapi.CommonEqualityMixin import CommonEqualityMixin
+from hoerapi.lowlevel import call_api
+from hoerapi.util import CommonEqualityMixin
+from hoerapi.parser import parser_list
 
 
 class Podcast(CommonEqualityMixin):
@@ -8,16 +9,5 @@ class Podcast(CommonEqualityMixin):
         self.title = data.get('title', None)
 
 
-class PodcastsApiResponse(ApiResponse):
-    def __init__(self, status, msg, podcasts):
-        ApiResponse.__init__(self, status, msg)
-
-        self.podcasts = []
-
-        if podcasts is not None:
-            for pod in podcasts:
-                self.podcasts.append(Podcast(pod))
-
-
 def get_podcasts():
-    return call_api('getPodcasts', PodcastsApiResponse, {})
+    return parser_list(Podcast, call_api('getPodcasts'))

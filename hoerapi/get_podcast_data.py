@@ -1,43 +1,36 @@
-from hoerapi.lowlevel import ApiResponse, call_api
+from hoerapi.lowlevel import call_api
+from hoerapi.parser import parser_object
+from hoerapi.util import parse_bool, CommonEqualityMixin
 
-
-class PodcastDataContact:
+class PodcastDataContact(CommonEqualityMixin):
     def __init__(self, data):
-        self.twitter = data.get('twitter', '')
-        self.adn     = data.get('adn', '')
-        self.email   = data.get('email', '')
+        self.twitter = data['twitter']
+        self.adn = data['adn']
+        self.email = data['email']
 
 
-class PodcastData:
+class PodcastData(CommonEqualityMixin):
     def __init__(self, data):
-        self.ID = data.get('ID', 0)
-        self.title = data.get('title', '')
-        self.description = data.get('description', '')
-        self.url = data.get('url', '')
-        self.feedurl = data.get('feedurl', '')
-        self.imageurl = data.get('imageurl', '')
-        self.slug = data.get('slug', '')
-        self.recension = data.get('recension', '')
-        self.cluster = data.get('cluster', '')
-        self.rec_pos = data.get('rec_pos', '')
-        self.rec_neg = data.get('rec_neg', '')
-        self.chat_server = data.get('chat_server', '')
-        self.chat_channel = data.get('chat_channel', '')
-        self.chat_url = data.get('chat_url', '')
-        self.obsolete = data.get('obsolete', '')
-        self.freeze = data.get('freeze', '')
-        self.stream = data.get('stream', '')
-        self.otitle = data.get('otitle', '')
-        self.feature = data.get('feature', '')
-        self.contact = PodcastDataContact(data.get('contact', {}))
-
-
-class PodcastDataApiResponse(ApiResponse):
-    def __init__(self, status, msg, data):
-        ApiResponse.__init__(self, status, msg)
-
-        self.data = PodcastData(data)
+        self.ID = int(data['ID'])
+        self.title = data['title']
+        self.description = data['description']
+        self.url = data['url']
+        self.feedurl = data['feedurl']
+        self.imageurl = data['imageurl']
+        self.slug = data['slug']
+        self.recension = data['recension']
+        self.cluster = data['cluster']
+        self.rec_pos = data['rec_pos']
+        self.rec_neg = data['rec_neg']
+        self.chat_server = data['chat_server']
+        self.chat_channel = data['chat_channel']
+        self.chat_url = data['chat_url']
+        self.obsolete = parse_bool(data['obsolete'])
+        self.freeze = parse_bool(data['freeze'])
+        self.otitle = data['otitle']
+        self.feature = parse_bool(data['feature'])
+        self.contact = PodcastDataContact(data['contact'])
 
 
 def get_podcast_data(podcast):
-    return call_api('getPodcastData', PodcastDataApiResponse, { 'podcast': podcast })
+    return parser_object(PodcastData, call_api('getPodcastData', { 'podcast': podcast }))
