@@ -10,7 +10,5 @@ setup(name='hoerapi',
       packages=['hoerapi'],
       install_requires=[
        'requests',
-       'pytest',
-       'pytest-cov',
       ],
      )
