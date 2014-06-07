@@ -1,5 +1,10 @@
 # hoerapi.py
 
+## Install
+```
+$ pip install hoerapi
+```
+
 ## Setup
 
 Use python3.
