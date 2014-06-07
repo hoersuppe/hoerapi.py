@@ -11,7 +11,7 @@ class PodcastDataContact(CommonEqualityMixin):
 
 class PodcastData(CommonEqualityMixin):
     def __init__(self, data):
-        self.ID = int(data['ID'])
+        self.id = int(data['ID'])
         self.title = data['title']
         self.description = data['description']
         self.url = data['url']
