@@ -10,7 +10,7 @@ class PodcastLive(CommonEqualityMixin):
         self.podcast = data['podcast']
         self.state = int(data['state'])
         self.type = int(data['type'])
-        self.synced = int(data['synced'])
+        self.synced = parse_bool(data['synced'])
         self.title = data['title']
         self.url = data['url']
         self.streamurl = data['streamurl']
