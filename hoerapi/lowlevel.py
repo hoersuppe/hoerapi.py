@@ -7,8 +7,8 @@ API_URL = r'http://hoersuppe.de/api/'
 
 def status():
     try:
-        resp = call_api('getLiveByID')
-        return resp.status == 0 and resp.msg == 'no ID given'
+        rjson = requests.get(API_URL, params={ 'action': 'getLiveByID' }).json()
+        return rjson['status'] == 0 and rjson['msg'] == 'no ID given'
     except:
         return False
 
