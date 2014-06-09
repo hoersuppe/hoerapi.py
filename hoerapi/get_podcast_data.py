@@ -4,6 +4,11 @@ from hoerapi.util import parse_bool, CommonEqualityMixin
 
 class PodcastDataContact(CommonEqualityMixin):
     def __init__(self, data):
+        # some podcasts return an empty array instead  of an object.
+        # This is invalid and will be ignored.
+        if isinstance(data, list):
+            return
+
         self.twitter = data.get('twitter', None)
         self.adn = data.get('adn', None)
         self.email = data.get('email', None)
