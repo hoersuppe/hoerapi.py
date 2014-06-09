@@ -35,6 +35,7 @@ class PodcastData(CommonEqualityMixin):
         self.otitle = data['otitle']
         self.feature = parse_bool(data['feature'])
         self.contact = PodcastDataContact(data['contact'])
+        self.rundfunk = parse_bool(data['rundfunk'])
 
 
 def get_podcast_data(podcast):
