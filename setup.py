@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='hoerapi',
-      version='1.1',
+      version='1.2',
       description='',
       author='luto',
       author_email='m@luto.at',
