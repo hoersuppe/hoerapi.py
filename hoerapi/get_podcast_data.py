@@ -4,9 +4,9 @@ from hoerapi.util import parse_bool, CommonEqualityMixin
 
 class PodcastDataContact(CommonEqualityMixin):
     def __init__(self, data):
-        self.twitter = data['twitter']
-        self.adn = data['adn']
-        self.email = data['email']
+        self.twitter = data.get('twitter', None)
+        self.adn = data.get('adn', None)
+        self.email = data.get('email', None)
 
 
 class PodcastData(CommonEqualityMixin):

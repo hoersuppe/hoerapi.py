@@ -55,6 +55,10 @@ print(data.cluster) # 'berlin'
   * returns: an array of `Podcast`
 
 
+### Errors
+todo
+
+
 ### Classes
 * general
   * All date-attributes are converted to `datetime` instances
@@ -64,6 +68,8 @@ print(data.cluster) # 'berlin'
 * `PodcastData`: https://github.com/hoersuppe/doc#getpodcastdata
   * boolean: `obsolete`, `freeze`, `feature`
   * `contact` is a `PodcastDataContact` instance
+* `PodcastDataContact`: contact section of a `PodcastData`
+  * all of the attributes may be `None` if there is not data
 * `PodcastEpisode`: https://github.com/hoersuppe/doc#getpodcastepisodes
   * `post_`-prefix has been removed
 * `PodcastLive`: https://github.com/hoersuppe/doc#getlive
