@@ -9,5 +9,12 @@ class DeleteEntry(CommonEqualityMixin):
         self.deldate = parse_date(data['deldate'])
 
 
-def get_deleted():
-    return parser_list(DeleteEntry, call_api('getDeleted'))
+def get_deleted(dateStart=None, dateEnd=None):
+    params = {}
+
+    if dateStart is not None:
+        params['dateStart'] = dateStart.strftime('%y-%m-%d')
+    if dateEnd is not None:
+        params['dateEnd'] = dateEnd.strftime('%y-%m-%d')
+
+    return parser_list(DeleteEntry, call_api('getDeleted', params))

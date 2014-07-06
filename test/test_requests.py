@@ -10,7 +10,12 @@ def test_status():
 
 def test_get_deleted():
     deleted = hoerapi.get_deleted()
-    assert len(deleted) > 0
+    assert isinstance(deleted, list)
+
+def test_get_deleted_date():
+    deleted = hoerapi.get_deleted(dateStart=datetime(2014, 4, 1), dateEnd=datetime(2014, 5, 1))
+    assert isinstance(deleted, list)
+    assert len(deleted) == 8
 
 
 def test_get_podcast_data():

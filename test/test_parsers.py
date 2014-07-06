@@ -26,7 +26,12 @@ class TestParserList:
 
     def test_no_array(self):
         with pytest.raises(InvalidDataError):
-            parser_list(MockCounter, None)
+            parser_list(MockCounter, (None,))
+
+    def test_none(self):
+        lst = parser_list(MockCounter, None)
+        assert isinstance(lst, list)
+        assert len(lst) == 0
 
 
 class TestParserObject:
