@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='hoerapi',
       version='1.3',
-      description='',
+      description='hoerapi in python',
       author='luto',
       author_email='m@luto.at',
       license='MIT',
