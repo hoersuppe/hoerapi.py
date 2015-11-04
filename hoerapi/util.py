@@ -1,8 +1,12 @@
 from datetime import datetime
+from pytz import timezone
 
 
-def parse_date(str):
-    return datetime.strptime(str, "%Y-%m-%d %H:%M:%S")
+''' zone for time returned by API '''
+DefaultZone = timezone('Europe/Berlin')
+def parse_date(val):
+    val = datetime.strptime(val, "%Y-%m-%d %H:%M:%S")
+    return DefaultZone.localize(val)
 
 
 def parse_bool(str):

@@ -9,6 +9,6 @@ setup(name='hoerapi',
       url='https://github.com/hoersuppe/hoerapi.py',
       packages=['hoerapi'],
       install_requires=[
-       'requests',
+       'requests', 'pytz',
       ],
      )
