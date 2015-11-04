@@ -1,11 +1,17 @@
 from datetime import datetime
+from iso8601 import parse_date as parse_isodate
 from pytz import timezone
 
 
 ''' zone for time returned by API '''
 DefaultZone = timezone('Europe/Berlin')
 def parse_date(val):
-    val = datetime.strptime(val, "%Y-%m-%d %H:%M:%S")
+    val = parse_isodate(val, DefaultZone)
+    ''' date has ISO zone information '''
+    if val.tzinfo != DefaultZone:
+        return val
+    ''' fix zoneinfo for obtained time '''
+    val = datetime.combine(val.date(), val.time())
     return DefaultZone.localize(val)
 
 
