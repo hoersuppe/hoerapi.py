@@ -29,6 +29,11 @@ data = hoerapi.get_podcast_data('wrint')
 print(data.cluster) # 'berlin'
 ```
 
+## Publishing
+```
+$ python setup.py sdist bdist_dumb upload
+```
+
 ### Methods
 * `status()`
   * returns `True` if the API seems to be up, otherwise `False`
