@@ -39,7 +39,7 @@ def test_get_podcast_episodes_404():
 
 
 def test_get_podcast_live():
-    live = hoerapi.get_podcast_live('wrint', 3)
+    live = hoerapi.get_podcast_live('breitband', 3)
     assert len(live) == 3
 
 
@@ -49,13 +49,15 @@ def test_get_podcast_live_404():
 
 
 def test_get_live():
-    live = hoerapi.get_live(5)
-    assert len(live) == 5
+    # default limitation are 5 elements
+    live = hoerapi.get_live(4)
+    assert len(live) == 4
 
 
 def test_get_live_date():
-    live = hoerapi.get_live(dateStart=datetime(2014, 12, 8), dateEnd=datetime(2014, 12, 9))
-    assert len(live) == 4
+    # may change if old episodes are added to database
+    live = hoerapi.get_live(count=10, dateStart=datetime(2014, 12, 8), dateEnd=datetime(2014, 12, 9))
+    assert len(live) == 9
 
 
 def test_get_live_by_id():
