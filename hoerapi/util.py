@@ -6,13 +6,11 @@ from pytz import timezone
 ''' zone for time returned by API '''
 DefaultZone = timezone('Europe/Berlin')
 def parse_date(val):
-    val = parse_isodate(val, DefaultZone)
-    ''' date has ISO zone information '''
-    if val.tzinfo != DefaultZone:
-        return val
-    ''' fix zoneinfo for obtained time '''
-    val = datetime.combine(val.date(), val.time())
-    return DefaultZone.localize(val)
+    val = parse_isodate(val, None)
+    ''' date has no ISO zone information '''
+    if not val.tzinfo:
+        val = DefaultZone.localize(val)
+    return val
 
 
 def parse_bool(str):
