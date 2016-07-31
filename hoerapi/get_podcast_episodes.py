@@ -7,10 +7,12 @@ class PodcastEpisode(CommonEqualityMixin):
     def __init__(self, data):
         self.id = int(data['ID'])
         self.date = parse_date(data['post_date'])
-        self.date_gmt = parse_date(data['post_date_gmt'])
+        gmt = data.get('post_date_gmt')
+        self.date_gmt = parse_date(gmt, 'gmt') if gmt else None
         self.name = data['post_name']
         self.modified = parse_date(data['post_modified'])
-        self.modified_gmt = parse_date(data['post_modified_gmt'])
+        gmt = data.get('post_date_gmt')
+        self.modified_gmt = parse_date(gmt, 'gmt') if gmt else None
         self.link = data['post_link']
         self.commentlink = data['post_commentlink']
         self.mediaurl = data['post_mediaurl']

@@ -30,6 +30,9 @@ def test_get_podcast_data_404():
 
 def test_get_podcast_episodes():
     episodes = hoerapi.get_podcast_episodes('wrint', 2)
+    for e in episodes:
+      assert(e.date == e.date_gmt)
+      assert(e.modified == e.modified_gmt)
     assert len(episodes) == 2
 
 
